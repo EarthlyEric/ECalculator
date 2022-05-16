@@ -9,6 +9,7 @@ import java.util.Objects;
 public class ECalculatorUI {
     public void build_button(Container panel, String title, GridBagLayout gridBagLayout, GridBagConstraints constraints,JTextField output){
         JButton button = new JButton(title);
+        button.setBackground(new Color(211, 211, 211));
         gridBagLayout.setConstraints(button, constraints);
         button.addActionListener(e ->
                 output.setText(output.getText()+title));
@@ -69,7 +70,7 @@ public class ECalculatorUI {
         button_AC.addActionListener(e -> {
             output.setText("");
         });
-
+        button_AC.setBackground(new Color(211, 211, 211));
         panel.add(button_AC);
 
         JButton button_equal = new JButton("=");
@@ -84,7 +85,9 @@ public class ECalculatorUI {
 
             //等待設計處理函式
         });
+        button_equal.setBackground(new Color(211, 211, 211));
         panel.add(button_equal);
+
         c.gridwidth = GridBagConstraints.REMAINDER;
         build_button(panel,"/",gridBagLayout,c,output );
     }
