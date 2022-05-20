@@ -3,8 +3,8 @@
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
   <jar>C:\Users\minec\Desktop\學習歷程檔案\自主學習計畫\ECalculator\out\artifacts\ECalculator_jar\ECalculator.jar</jar>
-  <outfile>C:\Users\minec\Desktop\學習歷程檔案\自主學習計畫\ECalculator\WindowBuild\ECalculator.exe</outfile>
-  <errTitle>請先安裝Java</errTitle>
+  <outfile>C:\Users\minec\Desktop\學習歷程檔案\自主學習計畫\ECalculator\WindowBuild\Build\ECalculator.exe</outfile>
+  <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
   <priority>normal</priority>
@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>C:\Users\minec\Desktop\學習歷程檔案\自主學習計畫\ECalculator\WindowBuild\ECalculator.ico</icon>
+  <icon></icon>
   <classPath>
     <mainClass>ECalculatorUI</mainClass>
   </classPath>
