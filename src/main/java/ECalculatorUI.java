@@ -1,3 +1,4 @@
+import window.ECalculatorInfo;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
@@ -33,17 +34,13 @@ public class ECalculatorUI {
                     int divided = output.getText().lastIndexOf("/");
                     int[] sort_array = {plus,minus,multiply,divided};
                     Arrays.sort(sort_array);
-                    System.out.println(Arrays.toString(sort_array));
                     if(!(sort_array[3] == -1)){
                         input.add(output.getText().substring(sort_array[3]+1));
-                        input.add(title);
-                        output.setText(output.getText()+title);
-                        System.out.println(input);
                     }else {
                         input.add(output.getText());
-                        input.add(title);
-                        output.setText(output.getText()+title);
                     }
+                    input.add(title);
+                    output.setText(output.getText()+title);
                 }
             });
         }else {
@@ -60,11 +57,12 @@ public class ECalculatorUI {
 
         GridBagConstraints c;
 
-        JTextField output = new JTextField();
+
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 25;
         c.gridwidth = GridBagConstraints.REMAINDER;
+        JTextField output = new JTextField();
         output.setEditable(false);
         output.setFont(textfieldFont);
         panel.add(output, c);
@@ -113,7 +111,6 @@ public class ECalculatorUI {
             for(int i=0;i<size;i++){
                 input.poll();
             }
-            System.out.println(input.toString());
             output.setText("");
         });
         button_AC.setBackground(new Color(211, 211, 211));
@@ -123,18 +120,44 @@ public class ECalculatorUI {
         JButton button_equal = new JButton("=");
         gridBagLayout.setConstraints(button_equal, c);
         button_equal.addActionListener(e -> {
-            if(Objects.equals(output.getText(), "")){
+            if(Objects.equals(output.getText(),"")){
                 output.setText(output.getText());
             }
             else{
                 if(Arrays.asList(checkSpecial).contains(output.getText().substring(output.getText().length()-1))){
                     output.setText(output.getText());
                 }else if(Arrays.asList(checkNumber).contains(output.getText().substring(output.getText().length()-1))){
-                    output.setText(output.getText()+"=");
+                    int plus = output.getText().lastIndexOf("+");
+                    int minus = output.getText().lastIndexOf("-");
+                    int multiply = output.getText().lastIndexOf("*");
+                    int divided = output.getText().lastIndexOf("/");
+                    int[] sort_array = {plus,minus,multiply,divided};
+                    Arrays.sort(sort_array);
+
+                    input.add(output.getText().substring(sort_array[3]+1));
+
+                    int result = Integer.parseInt(Objects.requireNonNull(input.poll()));
+                    while (!(input.size()==0)){
+                        String a = Objects.requireNonNull(input.poll());
+                        int b = Integer.parseInt(Objects.requireNonNull(input.poll()));
+                        switch (a)
+                        {
+                            case "+":
+                                result = result+b;
+                                break;
+                            case "-":
+                                result = result-b;
+                            case "*":
+                                result = result*b;
+                                break;
+                            case "/":
+                                result = result/b;
+                                break;
+                        }
+                    }
+                    output.setText(String.valueOf(result));
                 }
             }
-
-            //等待設計處理函式
         });
         button_equal.setBackground(new Color(211, 211, 211));
         button_equal.setFont(buttonFont);
@@ -150,24 +173,30 @@ public class ECalculatorUI {
         c.gridy = 5;
 
         JButton ECalculatorInfo = new JButton();
-        ECalculatorInfo.setIcon(new ImageIcon("InfoIcon.png"));
+        gridBagLayout.setConstraints(ECalculatorInfo,c);
+        ECalculatorInfo.setIcon(new ImageIcon("resources/InfoIcon.png"));
         ECalculatorInfo.setContentAreaFilled(false);
         ECalculatorInfo.setBorderPainted(false);
         ECalculatorInfo.setContentAreaFilled(false);
+        ECalculatorInfo.addActionListener(e ->
+                new ECalculatorInfo()
+        );
+        c.gridwidth = GridBagConstraints.REMAINDER;
         panel.add(ECalculatorInfo,c);
     }
     private ECalculatorUI() {
         JFrame ECalculatorWindow = new JFrame("ECalculator");
-        ECalculatorWindow.setBounds(300,200,310,360);
-        ImageIcon img = new ImageIcon("ECalculator.png");
+        ECalculatorWindow.setBounds(600,200,320,360);
+
+        ImageIcon img = new ImageIcon("resources/ECalculator.png");
         ECalculatorWindow.setIconImage(img.getImage());
         ECalculatorWindow.getContentPane().setBackground(new java.awt.Color(7, 18, 37));
+
         addWidgetToPanel(ECalculatorWindow.getContentPane());
+
         ECalculatorWindow.setVisible(true);
         ECalculatorWindow.setResizable(false);
-
     }
-
     public static void main(String[] args){
         javax.swing.SwingUtilities.invokeLater(ECalculatorUI::new);
     }
