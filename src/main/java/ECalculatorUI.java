@@ -8,8 +8,11 @@ import java.util.Queue;
 
 /**
  * ECalculator
- * @author EarthlyEric6(楊凱鈞)
+ * @author EarthlyEric6(KAI JUN YANG)
  * 2022/5/16
+ * UPDATED:2024/4/16
+ * @version 1.0.HOTFIX.1
+ *
  */
 public class ECalculatorUI {
     String[] checkNumber = {"0","1","2","3","4","5","6","7","8","9"};
@@ -124,9 +127,10 @@ public class ECalculatorUI {
                 output.setText(output.getText());
             }
             else{
-                if(Arrays.asList(checkSpecial).contains(output.getText().substring(output.getText().length()-1))){
+                String lastCharacter = output.getText().isEmpty() ? "" : output.getText().substring(output.getText().length() - 1);
+                if (Arrays.asList(checkSpecial).contains(lastCharacter)) {
                     output.setText(output.getText());
-                }else if(Arrays.asList(checkNumber).contains(output.getText().substring(output.getText().length()-1))){
+                } else if (Arrays.asList(checkNumber).contains(lastCharacter)) {
                     int plus = output.getText().lastIndexOf("+");
                     int minus = output.getText().lastIndexOf("-");
                     int multiply = output.getText().lastIndexOf("*");
@@ -136,24 +140,17 @@ public class ECalculatorUI {
 
                     input.add(output.getText().substring(sort_array[3]+1));
 
-                    int result = Integer.parseInt(Objects.requireNonNull(input.poll()));
-                    while (!(input.size()==0)){
+                    Float result = Float.parseFloat(Objects.requireNonNull(input.poll()));
+                    while (!(input.isEmpty())){
                         String a = Objects.requireNonNull(input.poll());
                         int b = Integer.parseInt(Objects.requireNonNull(input.poll()));
-                        switch (a)
-                        {
-                            case "+":
-                                result = result+b;
-                                break;
-                            case "-":
-                                result = result-b;
-                            case "*":
-                                result = result*b;
-                                break;
-                            case "/":
-                                result = result/b;
-                                break;
-                        }
+                        result = switch (a) {
+                            case "+" -> result + b;
+                            case "-" -> result - b;
+                            case "*" -> result * b;
+                            case "/" -> result / b;
+                            default -> result;
+                        };
                     }
                     output.setText(String.valueOf(result));
                 }
