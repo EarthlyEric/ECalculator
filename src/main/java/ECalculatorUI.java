@@ -1,4 +1,4 @@
-import window.ECalculatorInfo;
+import windows.ECalculatorInfo;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;

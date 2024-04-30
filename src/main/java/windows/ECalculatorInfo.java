@@ -1,4 +1,4 @@
-package window;
+package windows;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,13 +8,19 @@ public class ECalculatorInfo {
         GridBagLayout gridBagLayout = new GridBagLayout();
         panel.setLayout(gridBagLayout);
 
-        GridBagConstraints c;
+        GridBagConstraints line1 = new GridBagConstraints();
+        line1.fill = GridBagConstraints.HORIZONTAL;
+        GridBagConstraints line2 = new GridBagConstraints();
+        line2.fill = GridBagConstraints.HORIZONTAL;
+        line2.gridy = 1; 
 
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        JLabel text1 = new JLabel("Made by EarthlyEric6");
-        panel.add(text1,c);
+        JLabel author = new JLabel("Made by EarthlyEric6");
+        JLabel github_url = new JLabel("https://github.com/EarthlyEric/ECalculator");
+
+        panel.add(author, line1);
+        panel.add(github_url, line2);
     }
+
     public ECalculatorInfo(){
         JFrame ECalculatorInfoWindow = new JFrame("Info");
         ECalculatorInfoWindow.setBounds(600,300,310,100);
